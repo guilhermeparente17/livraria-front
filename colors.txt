@@ -1,0 +1,5 @@
+roxo: A233D4
+laranja: F79311
+branco: fff
+
+fundo: 442BE0
