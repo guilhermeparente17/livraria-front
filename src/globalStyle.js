@@ -7,7 +7,6 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Lato', sans-serif;
     list-style: none;
-    overflow: hidden;
   }
 
   body {
@@ -16,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
+    color: #fff;
   }
 
 `;

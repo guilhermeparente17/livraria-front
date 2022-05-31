@@ -1,34 +1,41 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { baseUrl } from '../../api/api';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import api from '../../api/api';
 import Button from '../../components/Button/Button'
+import Card from '../../components/Card/Card';
+import BookSelectors from '../../store/bookSelectors';
 
 import {
     BookContainer,
-    BookTitle
+    BookTitle,
+    BookHeader,
+    BookContent
 } from './Books.elements'
 
 const Books = () => {
 
-    const [livros, setLivros] = useState({}); //eslint-disable-line
-
-    const getAllBooks = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/books/');
-            console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    const [livros, setLivros] = useState([]);
+    const loading = useSelector(BookSelectors.getLoading)
 
     useEffect(() => {
-        getAllBooks();
-    })
+        api.get("books").then(({ data }) => {
+            setLivros(data);
+        })
+    }, [loading]);
 
     return (
         <BookContainer>
-            <Button text="Registrar um livro" />
-            <BookTitle>Seus Livros</BookTitle>
+            <BookHeader>
+                <Link to="/criar-livro"><Button text="+ Registrar um livro" /></Link>
+                <BookTitle>Seus Livros</BookTitle>
+            </BookHeader>
+
+            <BookContent>
+                {livros?.map(livro => (
+                    <Card key={livro._id} livro={livro} />
+                ))}
+            </BookContent>
         </BookContainer>
     )
 }

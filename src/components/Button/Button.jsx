@@ -6,7 +6,7 @@ import {
 const Button = ({ text }) => {
     return (
         <>
-            <ButtonFormat marginRight={200}>+ {text}</ButtonFormat>
+            <ButtonFormat>{text}</ButtonFormat>
         </>
     )
 }
